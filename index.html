@@ -1,49 +1,115 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="mobile-web-app-capable" content="yes">
-		<title>WhatsApp Any</title>
 
-		<link href="https://mincss.com/entireframework.min.css" rel="stylesheet" type="text/css">
-		
-		<style>
-			.hero {
-				background: #eee;
-				padding: 20px;
-				border-radius: 10px;
-				margin: 2em auto 2em auto;				
-			}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Dialer for WhatsApp</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-			.hero h1 {
-				margin-top: 0;
-				margin-bottom: 0.3em;
-			}
-		</style>
-	</head>
-	<body>
-		<nav class="nav" tabindex="-1" onclick="this.focus()">
-			<div class="container">
-				<a class="pagename current" href="#">WhatsApp Any</a>
-				<a href="https://faq.whatsapp.com/en/android/26000030/?category=5245251">FAQ</a>
-				<a href="mailto:mataherry@yahoo.com">Email Me</a>
-			</div>
-		</nav>
-		<button class="btn-close btn btn-sm">×</button>
-		<div class="container" style="width: 80%; margin: auto">
-			<p>Send a WhatsApp message to Any number without saving to your Contact list</p>
-			<div class="hero">
-				<h3>Input Phone Number</h3>
-				<span class="addon">+</span><input id="phoneno" type="tel" placeholder="6281xxx">
-				<p></p>
-				<a class="btn btn-sm btn-b" onclick="window.location = 'https://api.whatsapp.com/send?phone=' + document.getElementById('phoneno').value.replace(' ','').replace('+','').replace('(','').replace(')','')">Send WhatsApp!</a>
-			</div>
-			<p></p>
-			<div class="msg">
-				<strong>Note:</strong>
-				This phone number must have an active account on WhatsApp
-			</div>
-		</div>
-	</body>
+    body {
+        background: #F0F0F0;
+        display: flex;
+        flex-direction: column;
+        font-family: Helvetica, Arial, sans-serif;
+        min-height: 100vh;
+    }
+
+    header {
+        align-items: center;
+        background: #009B50;
+        color: white;
+        display: flex;
+        flex: 0 0 56px;
+        justify-content: center;
+    }
+
+    #content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 24rem;
+        width: 100%;
+    }
+
+    #content>div {
+        margin: 0 2em;
+    }
+
+    .form-field {
+        border: solid 3px #01E678;
+        border-radius: 5px;
+        display: flex;
+        font-size: 1.3rem;
+        height: 2.5rem;
+        line-height: 2.4rem;
+        margin: 1rem 0;
+    }
+
+    .form-field span {
+        background: #EEE;
+        border-right: solid 1px #CCC;
+        color: #444;
+        flex: 0 0 auto;
+        text-align: center;
+        width: 2.4rem;
+    }
+
+    .form-field input {
+        flex: 1;
+        border: 0;
+        font-size: inherit;
+        outline: none;
+        padding: 0 0.5rem;
+    }
+
+    button {
+        flex: 0 0 auto;
+        background: #01E678;
+        border: 0;
+        padding: 0.3rem;
+    }
+
+    footer {
+        flex: 0 0 1rem;
+        font-size: 0.5rem;
+    }
+    </style>
+</head>
+
+<body>
+    <header id="main-nav" tabindex="-1">
+        <h1>Dialer for WhatsApp</h1>
+    </header>
+    <div id="content">
+        <div>
+            <form id="form" action="https://api.whatsapp.com/send" method="GET">
+                <p class="form-field prefix"><span>+</span>
+                    <input id="phone" name="phone" type="tel" required autofocus pattern="\d+" title="Phone number cannot contain any spaces or special characters - only numbers" size="1" />
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="#FFFFFF" d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18" />
+                        </svg>
+                    </button>
+                </p>
+            </form>
+        </div>
+    </div>
+    <footer>
+    </footer>
+    <script>
+    const phone = document.getElementById("phone");
+    phone.addEventListener('input', function(event) {
+        phone.value = phone.value.replace(/\D/g, '');
+    })
+    </script>
+</body>
+
 </html>
